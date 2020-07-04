@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block device_info %}
+    <!-- Collapsable Card Example -->
+              <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                  <h5 class="m-0 font-weight-bold text-primary">{{ data.name }}</h5>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                  <div class="card-body">
+                      {% if data.online %}
+                      <h5><span class="badge badge-success">ONLINE</span></h5>
+                      {% else %}
+                       <h5><span class="badge badge-danger">OFFLINE</span></h5>
+                      {% endif %}
+                  </div>
+                </div>
+              </div>
+
+     <div class="row">
+
+            <!-- Battery %  -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="no-gutters align-items-center">
+                    <div class="">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Battery Percentage</div>
+                      <div class="h3 mb-0 font-weight-bold text-gray-800">{{ vitals.diagnostics.payload.device.power.battery.charge }} %</div>
+                         <small class="text-muted"><strong>{{ vitals.diagnostics.payload.device.power.battery.state | upper }}</strong></small>
+                    </div>
+                      {% if vitals.diagnostics.payload.device.power.battery.state == 'charging' %}
+
+                          {% if vitals.diagnostics.payload.device.power.battery.charge > 90 %}
+                    <div class=" ">
+                      <i class="fas fa-battery-full fa-3x" style="color: #1cc88a"></i>
+                    </div>
+
+                          {% elif vitals.diagnostics.payload.device.power.battery.charge > 50 %}
+                      <i class="fas fa-battery-three-quarters fa-3x" style="color: #1cc88a"></i>
+
+                          {% elif vitals.diagnostics.payload.device.power.battery.charge > 25 %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-half fa-3x" style="color: #1cc88a"></i>
+                    </div>
+
+                          {% else %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-one-quarter fa-3x" style="color: #1cc88a"></i>
+                    </div>
+                          {% endif %}
+
+
+                      {% else %}
+                      {% if vitals.diagnostics.payload.device.power.battery.charge > 90 %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-full fa-3x" style="color: #4f1915"></i>
+                    </div>
+
+                          {% elif vitals.diagnostics.payload.device.power.battery.charge > 50 %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-three-quarters fa-3x" style="color: #4f1915"></i>
+                    </div>
+
+                          {% elif vitals.diagnostics.payload.device.power.battery.charge > 25 %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-half fa-3x" style="color: #4f1915"></i>
+                    </div>
+
+                          {% else %}
+                    <div class="col-auto">
+                      <i class="fas fa-battery-one-quarter fa-3x" style="color: #4f1915"></i>
+                    </div>
+                          {% endif %}
+
+                      {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cellular Tower Devices -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cellular</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ vitals.diagnostics.payload.device.network.cellular.operator }}</div>
+                      <small class="text-muted"><strong>Technology: {{ vitals.diagnostics.payload.device.network.cellular.radio_access_technology | upper }}</strong></small>
+
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fas fa-broadcast-tower fa-3x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Signal Quality -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Signal Strength</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{vitals.diagnostics.payload.device.network.signal.strength}}%</div>
+                        </div>
+                        <div class="col">
+                          <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {{vitals.diagnostics.payload.device.network.signal.strength}}%" aria-valuenow="{{vitals.diagnostics.payload.device.network.signal.strength}}" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                     <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Signal Quality</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{vitals.diagnostics.payload.device.network.signal.quality}}%</div>
+                        </div>
+                        <div class="col">
+                          <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{vitals.diagnostics.payload.device.network.signal.quality}}%" aria-valuenow="{{vitals.diagnostics.payload.device.network.signal.quality}}" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           <!-- Cellular Tower Devices -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Updated</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ strftime(vitals.diagnostics.updated_at) }}</div>
+                      <small class="text-muted"><strong>Technology: {{ vitals.diagnostics.payload.device.network.cellular.radio_access_technology | upper }}</strong></small>
+
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fas fa-broadcast-tower fa-3x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pending Requests Card Example -->
+          </div>
+
+{{ vitals }}
+    <hr>
+    {{ data }}
+{% endblock device_info %}
