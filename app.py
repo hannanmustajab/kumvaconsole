@@ -18,11 +18,11 @@ def time_difference(time):
 
 @app.route('/')
 def index():
-    # url = "https://api.particle.io/v1/devices/?access_token=6f1f28a22de0f16e5762645c3d81db40be779789"
-    # r = requests.get(url).json()
-    # online_devices = [device for device in r if device['online'] is True]
-    # offline_devices = [device for device in r if device['online'] is False]
-    return render_template('index.html')
+    url = "https://api.particle.io/v1/devices/?access_token=6f1f28a22de0f16e5762645c3d81db40be779789"
+    r = requests.get(url).json()
+    online_devices = [device for device in r if device['online'] is True]
+    offline_devices = [device for device in r if device['online'] is False]
+    return render_template('index.html',online_devices=online_devices,offline_devices=offline_devices,total_devices=r)
 
 
 @app.route('/device/<device_id>', methods=['POST', 'GET'])

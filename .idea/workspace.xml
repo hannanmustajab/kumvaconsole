@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8d3529b-1874-466f-b97a-39d714bcf02b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/js/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/device.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/counts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/counts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/devices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/devices.html" afterDir="false" />
@@ -55,6 +53,9 @@
       <module name="KumvaDeviceFleetManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/templates" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -125,6 +126,7 @@
       <updated>1593605174775</updated>
       <workItem from="1593605184716" duration="26594000" />
       <workItem from="1593704551353" duration="21260000" />
+      <workItem from="1593867670433" duration="7744000" />
     </task>
     <servers />
   </component>
@@ -140,22 +142,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="443" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1593620430493" />
-    <state width="1398" height="98" key="GridCell.Tab.0.bottom" timestamp="1593854073796">
+    <state width="1398" height="358" key="GridCell.Tab.0.bottom" timestamp="1593867704947">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="98" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1593854073796" />
-    <state width="1398" height="98" key="GridCell.Tab.0.center" timestamp="1593854073795">
+    <state width="1398" height="358" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1593867704947" />
+    <state width="1398" height="358" key="GridCell.Tab.0.center" timestamp="1593867704946">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="98" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1593854073795" />
-    <state width="1398" height="98" key="GridCell.Tab.0.left" timestamp="1593854073794">
+    <state width="1398" height="358" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1593867704946" />
+    <state width="1398" height="358" key="GridCell.Tab.0.left" timestamp="1593867704945">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="98" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1593854073794" />
-    <state width="1398" height="98" key="GridCell.Tab.0.right" timestamp="1593854073795">
+    <state width="1398" height="358" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1593867704945" />
+    <state width="1398" height="358" key="GridCell.Tab.0.right" timestamp="1593867704946">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="98" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1593854073795" />
+    <state width="1398" height="358" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1593867704946" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1593704898026">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -170,13 +172,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="jinja2-line">
           <url>file://$PROJECT_DIR$/templates/base.html</url>
-          <line>133</line>
+          <line>130</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/KumvaDeviceFleetManager$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1593846933979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KumvaDeviceFleetManager$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1593867704938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

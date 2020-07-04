@@ -7,7 +7,8 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered"  width="100%" cellspacing="0">
+                <table class="table table-bordered"  width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -23,20 +24,6 @@
                     </tr>
                   </tfoot>
                   <tbody>
-{#                  {% for device in data %}#}
-{#                      {{ device }}#}
-{#                    <tr>#}
-{#                    {% if device.status =='charging' %}#}
-{#                        <td class="border-left-success"><strong><a href="device/{{ device.id }}"> {{ device.id }}</a></strong></td>#}
-{#                      <td><span class="badge badge-pill badge-success">Charging</span></td>#}
-{#                      <td>{{ device.battery }}</td>#}
-{#                    {% else %}#}
-{#                        <td class="border-left-danger"><a href="device/{{ device.id }}"> {{ device.id }}</a></td>#}
-{#                      <td><span class="badge badge-pill badge-danger">Offline</span></td>#}
-{#                      <td>{{ device.battery }}</td>#}
-{#                    {% endif %}#}
-{#                    </tr>#}
-{#                  {% endfor %}#}
                   </tbody>
                 </table>
               </div>

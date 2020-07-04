@@ -48,7 +48,7 @@
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: {{offline_devices | length}}%" aria-valuenow="{{offline_devices | length}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {{offline_devices | length}}%" aria-valuenow="{{offline_devices | length}}" aria-valuemin="0" aria-valuemax="{{ total_devices | length }}"></div>
                           </div>
                         </div>
                       </div>
