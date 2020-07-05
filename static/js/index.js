@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     days = Math.round(timeInHours / 24)
 
                     if (timeInHours > 2){
-                        name.setAttribute('class', 'border-left-danger border-bottom-danger border-top-danger')
-                        timestamp.setAttribute('class', 'border-bottom-danger')
+                        name.setAttribute('class', 'border-left-danger')
                     }
 
                     if (data.online){

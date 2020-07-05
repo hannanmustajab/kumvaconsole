@@ -31,4 +31,3 @@ for id in devices:
         data_list.append(data)
     except Exception as e:
         e
-
