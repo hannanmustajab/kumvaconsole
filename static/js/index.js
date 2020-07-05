@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 api_data.forEach(data => {
                     const row = document.createElement('tr')
                     const name = document.createElement('td')
+                    const batteryPercentage = document.createElement('td')
                     name.setAttribute('class', 'border-left-primary')
                     async function vitalFunc(id){
                         const vitalResponse = await fetch(`/${id}`)
@@ -23,14 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             {
                                 name.setAttribute('class', 'border-left-danger border-bottom-danger')
                             }
-                            else if(status == 'discharging' ||status == 'charged')
+                            else if(status == 'charging' ||status == 'charged')
                             {
                                 name.setAttribute('class', 'border-left-success border-bottom-success')
                             }
+                            batteryPercentage.innerHTML = `${battery}%`
                         }
                         catch(err)
                         {
                             console.log('Exception')
+                            batteryPercentage.innerHTML = 'Not Available'
                         }
                         if(data.online)
                     {
@@ -96,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.appendChild(name)
                     row.appendChild(online)
                     row.appendChild(timestamp)
+                    row.appendChild(batteryPercentage)
                     table.appendChild(row)
 
 
