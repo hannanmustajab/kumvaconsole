@@ -2,27 +2,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
             var online_devices = 0
             var total_devices = 0
-            const online_count = document.querySelector('#online-count')
-            const baseRequest = new XMLHttpRequest()
             const table = document.querySelector("tbody")
-
-            baseRequest.open('GET', '/api')
-
-            baseRequest.onload = () => {
-                console.log('Hello World in onload')
-                const api_data = JSON.parse(baseRequest.responseText)
+            const online_count = document.querySelector('#online-count')
+            console.log('HI')
+            async function baseFunc(){
+                const baseResponse = await fetch('/api')
+                const api_data = await baseResponse.json()
                 api_data.forEach(data => {
-                    console.log(data.online)
-                    if(data.online)
+                    const row = document.createElement('tr')
+                    const name = document.createElement('td')
+                    name.setAttribute('class', 'border-left-primary')
+                    async function vitalFunc(id){
+                        const vitalResponse = await fetch(`/${id}`)
+                        const vital_data = await vitalResponse.json()
+                        try
+                        {
+                            const status = vital_data.diagnostics.payload.device.power.battery.state
+                            const battery = vital_data.diagnostics.payload.device.power.battery.charge
+                            if(status == 'discharging')
+                            {
+                                name.setAttribute('class', 'border-left-danger border-bottom-danger')
+                            }
+                            else if(status == 'discharging' ||status == 'charged')
+                            {
+                                name.setAttribute('class', 'border-left-success border-bottom-success')
+                            }
+                        }
+                        catch(err)
+                        {
+                            console.log('Exception')
+                        }
+                        if(data.online)
                     {
                         online_devices = online_devices + 1
                         console.log('online')
                         online_count.innerHTML = online_devices
                     }
-                    const row = document.createElement('tr')
-
-                    const name = document.createElement('td')
-                    name.setAttribute('class', 'border-left-primary')
 
                     const online = document.createElement('td')
 
@@ -46,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     days = Math.round(timeInHours / 24)
 
                     if (timeInHours > 2){
-                        name.setAttribute('class', 'border-left-danger border-bottom-danger border-top-danger')
                         timestamp.setAttribute('class', 'border-bottom-danger')
                     }
 
@@ -85,12 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     table.appendChild(row)
 
 
-
                     console.log(data)
+                    }
+                    vitalFunc(data.id)
                 })
-
-
             }
-
-            baseRequest.send()
+            baseFunc();
             });
