@@ -1,95 +1,129 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-            var online_devices = 0
-            var total_devices = 0
-            const online_count = document.querySelector('#online-count')
-            const baseRequest = new XMLHttpRequest()
-            const table = document.querySelector("tbody")
+    var online_devices = 0
+    var total_devices = 0
+    const table = document.querySelector("tbody")
+    const online_count = document.querySelector('#online-count')
 
-            baseRequest.open('GET', '/api')
+    async function baseFunc() {
 
-            baseRequest.onload = () => {
-                console.log('Hello World in onload')
-                const api_data = JSON.parse(baseRequest.responseText)
-                api_data.forEach(data => {
-                    console.log(data.online)
-                    if(data.online)
-                    {
-                        online_devices = online_devices + 1
-                        console.log('online')
-                        online_count.innerHTML = online_devices
-                    }
-                    const row = document.createElement('tr')
+        const baseResponse = await fetch('/api')
+        const api_data = await baseResponse.json()
 
-                    const name = document.createElement('td')
-                    name.setAttribute('class', 'border-left-primary')
+        api_data.forEach(data => {
+            const row = document.createElement('tr')
+            const name = document.createElement('td')
+            const batteryPercentage = document.createElement('td')
+            const signal_strength_value = document.createElement('td')
+            const signal_quality_value = document.createElement('td')
+            const roundTripValue = document.createElement('td')
+            const operatorValue = document.createElement('td')
+            name.setAttribute('class', 'border-left-primary')
 
-                    const online = document.createElement('td')
+            async function vitalFunc(id) {
+                const vitalResponse = await fetch(`/${id}`)
+                const vital_data = await vitalResponse.json()
+                try {
+                    const status = vital_data.diagnostics.payload.device.power.battery.state
+                    const battery = vital_data.diagnostics.payload.device.power.battery.charge
+                    const signal_strength = vital_data.diagnostics.payload.device.network.signal.strength
+                    const operator = vital_data.diagnostics.payload.device.network.cellular.operator
+                    const signal_quality = vital_data.diagnostics.payload.device.network.signal.quality
+                    const round_trip = vital_data.diagnostics.payload.service.coap.round_trip
+                    operatorValue.innerHTML = operator
+                    roundTripValue.innerHTML = round_trip
 
-                    const timestamp = document.createElement('td')
+                    signal_quality_value.innerHTML = signal_quality + ' %'
+                    signal_strength_value.innerHTML = signal_strength + '%'
+                    // if(status == 'discharging')
+                    // {
+                    //    pass
+                    //
+                    // }
+                    // else if(status == 'charging' ||status == 'charged')
+                    // {
+                    //     pass
+                    // }
+                    batteryPercentage.innerHTML = `${battery}%`
+                } catch (err) {
+                    console.log('Exception')
+                    batteryPercentage.innerHTML = 'Not Available'
+                }
+                if (data.online) {
+                    online_devices = online_devices + 1
+                    console.log('online')
+                    online_count.innerHTML = online_devices
+                }
 
-                    const strong = document.createElement('strong')
-                    const link = document.createElement('a')
+                const online = document.createElement('td')
 
-                    var timestamp_new = new Date(data.last_heard)
-                    var timestamp_now = new Date()
-                    var timeInMS = 0
-                    var timeInSec = 0
-                    var timeInMinutes = 0
-                    var timeInHours  = 0
-                    var days = 0
+                const timestamp = document.createElement('td')
 
-                    timeInMS = timestamp_now - timestamp_new
-                    timeInSec = Math.round(timeInMS / (1000))
-                    timeInMinutes = Math.round(timeInSec / (60))
-                    timeInHours = Math.round(timeInMinutes / (60))
-                    days = Math.round(timeInHours / 24)
+                const strong = document.createElement('strong')
+                const link = document.createElement('a')
 
-                    if (timeInHours > 2){
-                        name.setAttribute('class', 'border-left-danger')
-                    }
+                var timestamp_new = new Date(data.last_heard)
+                var timestamp_now = new Date()
+                var timeInMS = 0
+                var timeInSec = 0
+                var timeInMinutes = 0
+                var timeInHours = 0
+                var days = 0
 
-                    if (data.online){
-                        const span = document.createElement('span')
-                        span.setAttribute('class','badge badge-pill badge-success')
-                        online.appendChild(span)
-                        span.innerHTML = 'Online'
-                    }else {
-                        const span = document.createElement('span')
-                        span.setAttribute('class','badge badge-pill badge-danger')
-                        online.appendChild(span)
-                        span.innerHTML = 'Offline'
-                    }
+                timeInMS = timestamp_now - timestamp_new
+                timeInSec = Math.round(timeInMS / (1000))
+                timeInMinutes = Math.round(timeInSec / (60))
+                timeInHours = Math.round(timeInMinutes / (60))
+                days = Math.round(timeInHours / 24)
 
-                    if (timeInSec <= 60){
-                         console.log(timeInSec)
-                         timestamp.innerHTML =  timeInSec + ' Seconds Ago'
-                    }else if (timeInSec > 60 & timeInMinutes < 59){
-                         timestamp.innerHTML = timeInMinutes + ' Minutes Ago'
-                     }else if(timeInMinutes >= 59 & timeInHours <= 24 ){
-                         timestamp.innerHTML = timeInHours + ' Hours Ago'
-                     }else if(timeInHours > 24 ){
-                        timestamp.innerHTML = days + ' Days ago'
-                    }
+                if (timeInHours > 2) {
+                    name.setAttribute('class', 'border-left-danger')
+                    // timestamp.setAttribute('class', 'border-bottom-danger')
+                }
 
+                if (data.online) {
+                    const span = document.createElement('span')
+                    span.setAttribute('class', 'badge badge-pill badge-success')
+                    online.appendChild(span)
+                    span.innerHTML = 'Online'
+                } else {
+                    const span = document.createElement('span')
+                    span.setAttribute('class', 'badge badge-pill badge-danger')
+                    online.appendChild(span)
+                    span.innerHTML = 'Offline'
+                }
 
-
-                    link.innerHTML = data.name
-                    link.setAttribute('href', `device/${data.id}`)
-                    strong.appendChild(link)
-                    name.appendChild(strong)
-                    row.appendChild(name)
-                    row.appendChild(online)
-                    row.appendChild(timestamp)
-                    table.appendChild(row)
+                if (timeInSec <= 60) {
+                    console.log(timeInSec)
+                    timestamp.innerHTML = timeInSec + ' Seconds Ago'
+                } else if (timeInSec > 60 & timeInMinutes < 59) {
+                    timestamp.innerHTML = timeInMinutes + ' Minutes Ago'
+                } else if (timeInMinutes >= 59 & timeInHours <= 24) {
+                    timestamp.innerHTML = timeInHours + ' Hours Ago'
+                } else if (timeInHours > 24) {
+                    timestamp.innerHTML = days + ' Days ago'
+                }
 
 
-
-                    console.log(data)
-                })
-
-
+                link.innerHTML = data.name
+                link.setAttribute('href', `device/${data.id}`)
+                strong.appendChild(link)
+                name.appendChild(strong)
+                row.appendChild(name)
+                row.appendChild(online)
+                row.appendChild(timestamp)
+                row.appendChild(batteryPercentage)
+                row.appendChild(signal_strength_value)
+                row.appendChild(signal_quality_value)
+                row.appendChild(roundTripValue)
+                row.appendChild(operatorValue)
+                table.appendChild(row)
+                console.log(data)
             }
 
-            baseRequest.send()
-            });
+            vitalFunc(data.id)
+        })
+    }
+
+    baseFunc();
+});

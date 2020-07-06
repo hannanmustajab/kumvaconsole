@@ -8,13 +8,10 @@ import timestring
 
 
 app = Flask(__name__)
-def time_difference(time):
-    now =  datetime.datetime.now(tz=timezone.utc)
-    print(now)
-    timestamp = datetime.datetime.strptime(time,"%Y-%m-%dT%H:%M:%S.%fz")
-    print(timestamp)
-    difference = now - timestamp
-    return difference.seconds
+
+
+
+
 
 @app.route('/')
 def index():
@@ -44,6 +41,13 @@ def viewDevice(device_id):
 def api():
     base_url = "https://api.particle.io/v1/devices/?access_token=6f1f28a22de0f16e5762645c3d81db40be779789"
     r = requests.get(base_url).json()
+    return jsonify(r)
+
+
+@app.route('/<string:id>')
+def vital_api(id):
+    vitals = f"https://api.particle.io/v1/products/10709/diagnostics/{id}/last?access_token=6f1f28a22de0f16e5762645c3d81db40be779789"
+    r = requests.get(vitals).json()
     return jsonify(r)
 
 
