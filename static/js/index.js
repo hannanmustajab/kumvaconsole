@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const roundTripValue = document.createElement('td')
             const operatorValue = document.createElement('td')
             name.setAttribute('class', 'border-left-primary')
+            const alertGlyphicon = document.createElement('span')
+            const span = document.createElement('span')
+            const round_trip_span = document.createElement('span')
+
 
             async function vitalFunc(id) {
                 const vitalResponse = await fetch(`/${id}`)
@@ -30,8 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     const operator = vital_data.diagnostics.payload.device.network.cellular.operator
                     const signal_quality = vital_data.diagnostics.payload.device.network.signal.quality
                     const round_trip = vital_data.diagnostics.payload.service.coap.round_trip
+
+                    if (round_trip > 2000) {
+                        round_trip_span.setAttribute('class', 'badge badge-pill badge-danger')
+                        roundTripValue.appendChild(round_trip_span)
+                        round_trip_span.innerHTML = round_trip +' ms'
+                    }else{
+                        round_trip_span.setAttribute('class', 'badge badge-pill badge-success')
+                        roundTripValue.appendChild(round_trip_span)
+                        round_trip_span.innerHTML = round_trip +' ms'
+
+                    }
+
                     operatorValue.innerHTML = operator
-                    roundTripValue.innerHTML = round_trip
+
 
                     signal_quality_value.innerHTML = signal_quality + ' %'
                     signal_strength_value.innerHTML = signal_strength + '%'
@@ -54,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('online')
                     online_count.innerHTML = online_devices
                 }
+
+
 
                 const online = document.createElement('td')
 
@@ -82,12 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (data.online) {
-                    const span = document.createElement('span')
                     span.setAttribute('class', 'badge badge-pill badge-success')
                     online.appendChild(span)
                     span.innerHTML = 'Online'
                 } else {
-                    const span = document.createElement('span')
                     span.setAttribute('class', 'badge badge-pill badge-danger')
                     online.appendChild(span)
                     span.innerHTML = 'Offline'
