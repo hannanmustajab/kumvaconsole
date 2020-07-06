@@ -19,9 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const roundTripValue = document.createElement('td')
             const operatorValue = document.createElement('td')
             name.setAttribute('class', 'border-left-primary')
-            const alertGlyphicon = document.createElement('span')
+            name.style.width = '50px'
             const span = document.createElement('span')
             const round_trip_span = document.createElement('span')
+            const battery_span = document.createElement('span')
+            const signal_strength_span = document.createElement('span')
+            const signal_quality_span = document.createElement('span')
 
 
             async function vitalFunc(id) {
@@ -35,41 +38,96 @@ document.addEventListener('DOMContentLoaded', () => {
                     const signal_quality = vital_data.diagnostics.payload.device.network.signal.quality
                     const round_trip = vital_data.diagnostics.payload.service.coap.round_trip
 
+                    // Signal Strength Logic
+                    if (signal_strength > 60){
+                        signal_strength_span.setAttribute('class', 'badge badge-pill badge-success')
+                        signal_strength_value.appendChild(signal_strength_span)
+                        signal_strength_span.innerHTML = signal_strength + ' %'
+                    }else if (signal_strength <= 60 & signal_strength > 30){
+                        signal_strength_span.setAttribute('class', 'badge badge-pill badge-warning')
+                        signal_strength_value.appendChild(signal_strength_span)
+                        signal_strength_span.innerHTML = signal_strength + ' %'
+                    }else if (signal_strength <= 30){
+                        signal_strength_span.setAttribute('class', 'badge badge-pill badge-danger')
+                        signal_strength_value.appendChild(signal_strength_span)
+                        signal_strength_span.innerHTML = signal_strength + ' %'
+                    }else {
+                        signal_strength_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                        signal_strength_value.appendChild(signal_strength_span)
+                        signal_strength_span.innerHTML = 'N.A'
+                    }
+
+                    // Signal Quality Logic
+                    if (signal_quality > 70){
+                        signal_quality_span.setAttribute('class', 'badge badge-pill badge-success')
+                        signal_quality_value.appendChild(signal_quality_span)
+                        signal_quality_span.innerHTML = signal_quality + ' %'
+                    }else if (signal_quality <= 70 & signal_strength > 40){
+                        signal_quality_span.setAttribute('class', 'badge badge-pill badge-warning')
+                        signal_quality_value.appendChild(signal_quality_span)
+                        signal_quality_span.innerHTML = signal_quality + ' %'
+                    }else if (signal_quality <= 40){
+                        signal_quality_span.setAttribute('class', 'badge badge-pill badge-danger')
+                        signal_quality_value.appendChild(signal_quality_span)
+                        signal_quality_span.innerHTML = signal_quality + ' %'
+                    }
+                    else {
+                        signal_quality_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                        signal_quality_value.appendChild(signal_quality_span)
+                        signal_quality_span.innerHTML = 'N.A'
+                    }
+
+                    // Round Trip Logic
+
                     if (round_trip > 2000) {
                         round_trip_span.setAttribute('class', 'badge badge-pill badge-danger')
                         roundTripValue.appendChild(round_trip_span)
-                        round_trip_span.innerHTML = round_trip +' ms'
-                    }else{
+                        round_trip_span.innerHTML = round_trip + ' ms'
+                    } else {
                         round_trip_span.setAttribute('class', 'badge badge-pill badge-success')
                         roundTripValue.appendChild(round_trip_span)
-                        round_trip_span.innerHTML = round_trip +' ms'
+                        round_trip_span.innerHTML = round_trip + ' ms'
 
                     }
 
                     operatorValue.innerHTML = operator
 
 
-                    signal_quality_value.innerHTML = signal_quality + ' %'
-                    signal_strength_value.innerHTML = signal_strength + '%'
-                    // if(status == 'discharging')
-                    // {
-                    //    pass
-                    //
-                    // }
-                    // else if(status == 'charging' ||status == 'charged')
-                    // {
-                    //     pass
-                    // }
-                    batteryPercentage.innerHTML = `${battery}%`
+                    // signal_quality_value.innerHTML = signal_quality + ' %'
+                    // signal_strength_value.innerHTML = signal_strength + '%'
+
+                    if (battery > 70) {
+                        battery_span.setAttribute('class', 'badge badge-pill badge-success')
+                        batteryPercentage.appendChild(battery_span)
+                        battery_span.innerHTML = battery + ' %'
+
+                    } else if (battery <= 70 & battery > 50) {
+                        battery_span.setAttribute('class', 'badge badge-pill badge-warning')
+                        batteryPercentage.appendChild(battery_span)
+                        battery_span.innerHTML = battery + ' %'
+                    } else if (battery <= 50) {
+                        battery_span.setAttribute('class', 'badge badge-pill badge-danger')
+                        batteryPercentage.appendChild(battery_span)
+                        battery_span.innerHTML = battery + ' %'
+                    } else if (status == 'charging' || status == 'charged') {
+                        pass
+                    }
+                    // batteryPercentage.innerHTML = `${battery}%`
                 } catch (err) {
-                    console.log('Exception')
-                    batteryPercentage.innerHTML = 'Not Available'
+                    battery_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                    batteryPercentage.appendChild(battery_span)
+                    battery_span.innerHTML = 'N.A'
                 }
                 if (data.online) {
                     online_devices = online_devices + 1
                     console.log('online')
                     online_count.innerHTML = online_devices
                 }
+
+
+
+
+
 
 
 
