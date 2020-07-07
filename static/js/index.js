@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const battery_span = document.createElement('span')
             const signal_strength_span = document.createElement('span')
             const signal_quality_span = document.createElement('span')
+            const offline_span = document.createElement('span')
 
 
             async function vitalFunc(id) {
@@ -33,45 +34,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const status = vital_data.diagnostics.payload.device.power.battery.state
                     const battery = vital_data.diagnostics.payload.device.power.battery.charge
-                    const signal_strength = vital_data.diagnostics.payload.device.network.signal.strength
+                    const signal_strength = Math.round(vital_data.diagnostics.payload.device.network.signal.strength)
                     const operator = vital_data.diagnostics.payload.device.network.cellular.operator
-                    const signal_quality = vital_data.diagnostics.payload.device.network.signal.quality
+                    const signal_quality = Math.round(vital_data.diagnostics.payload.device.network.signal.quality)
                     const round_trip = vital_data.diagnostics.payload.service.coap.round_trip
 
                     // Signal Strength Logic
-                    if (signal_strength > 60){
+                    if (signal_strength > 60) {
                         signal_strength_span.setAttribute('class', 'badge badge-pill badge-success')
                         signal_strength_value.appendChild(signal_strength_span)
                         signal_strength_span.innerHTML = signal_strength + ' %'
-                    }else if (signal_strength <= 60 & signal_strength > 30){
+                    } else if (signal_strength <= 60 & signal_strength > 30) {
                         signal_strength_span.setAttribute('class', 'badge badge-pill badge-warning')
                         signal_strength_value.appendChild(signal_strength_span)
                         signal_strength_span.innerHTML = signal_strength + ' %'
-                    }else if (signal_strength <= 30){
+                    } else if (signal_strength <= 30) {
                         signal_strength_span.setAttribute('class', 'badge badge-pill badge-danger')
                         signal_strength_value.appendChild(signal_strength_span)
                         signal_strength_span.innerHTML = signal_strength + ' %'
-                    }else {
+                    } else {
                         signal_strength_span.setAttribute('class', 'badge badge-pill badge-secondary')
                         signal_strength_value.appendChild(signal_strength_span)
                         signal_strength_span.innerHTML = 'N.A'
                     }
 
                     // Signal Quality Logic
-                    if (signal_quality > 70){
+                    if (signal_quality > 70) {
                         signal_quality_span.setAttribute('class', 'badge badge-pill badge-success')
                         signal_quality_value.appendChild(signal_quality_span)
                         signal_quality_span.innerHTML = signal_quality + ' %'
-                    }else if (signal_quality <= 70 & signal_strength > 40){
+                    } else if (signal_quality <= 70 & signal_strength > 40) {
                         signal_quality_span.setAttribute('class', 'badge badge-pill badge-warning')
                         signal_quality_value.appendChild(signal_quality_span)
                         signal_quality_span.innerHTML = signal_quality + ' %'
-                    }else if (signal_quality <= 40){
+                    } else if (signal_quality <= 40) {
                         signal_quality_span.setAttribute('class', 'badge badge-pill badge-danger')
                         signal_quality_value.appendChild(signal_quality_span)
                         signal_quality_span.innerHTML = signal_quality + ' %'
-                    }
-                    else {
+                    } else {
                         signal_quality_span.setAttribute('class', 'badge badge-pill badge-secondary')
                         signal_quality_value.appendChild(signal_quality_span)
                         signal_quality_span.innerHTML = 'N.A'
@@ -117,18 +117,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     battery_span.setAttribute('class', 'badge badge-pill badge-secondary')
                     batteryPercentage.appendChild(battery_span)
                     battery_span.innerHTML = 'N.A'
+                    signal_quality_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                    signal_quality_value.appendChild(signal_quality_span)
+                    signal_quality_span.innerHTML = 'N.A'
+                    signal_strength_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                    signal_strength_value.appendChild(signal_strength_span)
+                    signal_strength_span.innerHTML = 'N.A'
+                    round_trip_span.setAttribute('class', 'badge badge-pill badge-secondary')
+                    roundTripValue.appendChild(round_trip_span)
+                    round_trip_span.innerHTML = 'N.A'
+
                 }
                 if (data.online) {
                     online_devices = online_devices + 1
                     console.log('online')
                     online_count.innerHTML = online_devices
                 }
-
-
-
-
-
-
 
 
                 const online = document.createElement('td')
@@ -154,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (timeInHours > 2) {
                     name.setAttribute('class', 'border-left-danger')
+
                     // timestamp.setAttribute('class', 'border-bottom-danger')
                 }
 
@@ -173,11 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (timeInSec > 60 & timeInMinutes < 59) {
                     timestamp.innerHTML = timeInMinutes + ' Minutes Ago'
                 } else if (timeInMinutes >= 59 & timeInHours <= 24) {
-                    timestamp.innerHTML = timeInHours + ' Hours Ago'
-                } else if (timeInHours > 24) {
-                    timestamp.innerHTML = days + ' Days ago'
-                }
+                    if (timeInHours > 2) {
+                        offline_span.setAttribute('class', 'badge badge-pill badge-danger')
+                        timestamp.appendChild(offline_span)
+                        offline_span.innerHTML = timeInHours + ' Hours Ago'
+                    } else if (timeInHours < 2) {
+                        timestamp.innerHTML = timeInHours + ' Hours Ago'
+                    }
 
+                } else if (timeInHours > 24) {
+                    offline_span.setAttribute('class', 'badge badge-pill badge-danger')
+                    timestamp.appendChild(offline_span)
+                    offline_span.innerHTML = days + ' Days ago'
+                }
 
                 link.innerHTML = data.name
                 link.setAttribute('href', `device/${data.id}`)
