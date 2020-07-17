@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c8d3529b-1874-466f-b97a-39d714bcf02b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/devices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/devices.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/sb-admin-2.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/sb-admin-2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/sb-admin-2.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/sb-admin-2.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/counts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/counts.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +126,9 @@
       <updated>1593605174775</updated>
       <workItem from="1593605184716" duration="26594000" />
       <workItem from="1593704551353" duration="21260000" />
-      <workItem from="1593867670433" duration="24625000" />
+      <workItem from="1593867670433" duration="25073000" />
+      <workItem from="1594230963627" duration="142000" />
+      <workItem from="1594981221997" duration="1651000" />
     </task>
     <servers />
   </component>
@@ -139,26 +144,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="443" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1593620430493" />
-    <state width="1398" height="138" key="GridCell.Tab.0.bottom" timestamp="1594116995149">
+    <state width="1398" height="133" key="GridCell.Tab.0.bottom" timestamp="1594982155281">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="138" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1594116995149" />
-    <state width="1398" height="138" key="GridCell.Tab.0.center" timestamp="1594116995148">
+    <state width="1398" height="133" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1594982155281" />
+    <state width="1398" height="441" key="GridCell.Tab.0.bottom/0.23.1440.803@0.23.1440.803" timestamp="1594230176248" />
+    <state width="1398" height="133" key="GridCell.Tab.0.center" timestamp="1594982155279">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="138" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1594116995148" />
-    <state width="1398" height="138" key="GridCell.Tab.0.left" timestamp="1594116995147">
+    <state width="1398" height="133" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1594982155279" />
+    <state width="1398" height="441" key="GridCell.Tab.0.center/0.23.1440.803@0.23.1440.803" timestamp="1594230176247" />
+    <state width="1398" height="133" key="GridCell.Tab.0.left" timestamp="1594982155278">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="138" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1594116995147" />
-    <state width="1398" height="138" key="GridCell.Tab.0.right" timestamp="1594116995149">
+    <state width="1398" height="133" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1594982155278" />
+    <state width="1398" height="441" key="GridCell.Tab.0.left/0.23.1440.803@0.23.1440.803" timestamp="1594230176246" />
+    <state width="1398" height="133" key="GridCell.Tab.0.right" timestamp="1594982155280">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="138" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1594116995149" />
-    <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1593704898026">
+    <state width="1398" height="133" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1594982155280" />
+    <state width="1398" height="441" key="GridCell.Tab.0.right/0.23.1440.803@0.23.1440.803" timestamp="1594230176248" />
+    <state x="397" y="275" key="com.intellij.ide.util.TipDialog" timestamp="1594231188160">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1593704898026" />
+    <state x="397" y="275" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1594231188160" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1593712766053">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -169,13 +178,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="jinja2-line">
           <url>file://$PROJECT_DIR$/templates/base.html</url>
-          <line>130</line>
+          <line>123</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/KumvaDeviceFleetManager$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1594116995083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KumvaDeviceFleetManager$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1594982155242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

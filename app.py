@@ -9,10 +9,6 @@ import timestring
 
 app = Flask(__name__)
 
-
-
-
-
 @app.route('/')
 def index():
     url = "https://api.particle.io/v1/devices/?access_token=6f1f28a22de0f16e5762645c3d81db40be779789"
